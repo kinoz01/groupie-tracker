@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Groupie Tracker</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://i.ibb.co/zFfCjxH/Pngtree-phoenix-png-6854120.png" type="image/x-icon">
+</head>
+<body>
+    <header class="header">    
+        <div class="text-box">
+            <h1 class="main-heading">GROUPIE TRACKER</h1>
+        </div>
+    </header>
+    
+    <!-- Search Bar -->
+    <input type="text" id="searchBar" class="search-bar" placeholder="Search by artist, members, locations..." oninput="filterArtists()">
+    <ul id="suggestionsList" class="suggestions-list"></ul> <!-- Suggestions dropdown -->
+
+    <!-- Filter Toggle Button -->
+    <button id="filterToggleBtn" class="filter-toggle-btn">Filters</button>
+
+    <!-- Filters Section (Initially Hidden) -->
+    <div class="filter-container" id="filterContainer">
+        <!-- Filter by Creation Date -->
+        <div class="filter-section">
+            <h3>Filter by Creation Date</h3>
+            <div class="filter-row">
+                <label for="creationDateFrom">From:</label>
+                <input type="number" id="creationDateFrom" placeholder="Year" oninput="applyFilters()">
+                <label for="creationDateTo">To:</label>
+                <input type="number" id="creationDateTo" placeholder="Year" oninput="applyFilters()">
+            </div>
+        </div>
+        
+         <!-- Filter by First Album Year -->
+        <div class="filter-section">
+            <h3>Filter by First Album Year</h3>
+            <div class="filter-row">
+                <label for="firstAlbumFrom">From:</label>
+                <input type="number" id="firstAlbumFrom" placeholder="Year" oninput="applyFilters()">
+                <label for="firstAlbumTo">To:</label>
+                <input type="number" id="firstAlbumTo" placeholder="Year" oninput="applyFilters()">
+            </div>
+        </div>
+        
+        <!-- Filter by Number of Members (Checkboxes) -->
+        <div class="filter-section">
+            <h3>Filter by Number of Members</h3>
+            <div class="filter-row members-checkboxes">
+                <!-- Checkboxes for number of members -->
+                <label><input type="checkbox" class="membersCheckbox" value="1" onchange="applyFilters()">1</label>
+                <label><input type="checkbox" class="membersCheckbox" value="2" onchange="applyFilters()">2</label>
+                <label><input type="checkbox" class="membersCheckbox" value="3" onchange="applyFilters()">3</label>
+                <label><input type="checkbox" class="membersCheckbox" value="4" onchange="applyFilters()">4</label>
+                <label><input type="checkbox" class="membersCheckbox" value="5" onchange="applyFilters()">5</label>
+                <label><input type="checkbox" class="membersCheckbox" value="6" onchange="applyFilters()">6</label>
+                <label><input type="checkbox" class="membersCheckbox" value="7" onchange="applyFilters()">7</label>
+                <label><input type="checkbox" class="membersCheckbox" value="8" onchange="applyFilters()">8</label>
+                <label><input type="checkbox" class="membersCheckbox" value="9" onchange="applyFilters()">9</label>
+                <label><input type="checkbox" class="membersCheckbox" value="10" onchange="applyFilters()">10</label>
+                <!-- Adjust numbers based on your data -->
+            </div>
+        </div>
+        
+        <!-- Filter by Locations (Dropdown Menu) -->
+        <div class="filter-section">
+            <h3>Filter by Locations</h3>
+            <select id="locationSelect" onchange="applyFilters()">
+                <option value="all">All Locations</option>
+                <!-- Options will be generated dynamically -->
+            </select>
+        </div>
+
+        <!-- Clear Filters Button -->
+        <div class="filter-row">
+            <button id="clearFiltersBtn" class="clear-filters-btn" onclick="clearFilters()">Clear Filters</button>
+        </div>
+    </div>
+    
+    <ul id="artistList">
+        {{range .}}
+        <li class="link">
+            <a href="/artist?id={{.ID}}">
+                <img class="brand-img" src="{{.Image}}" alt="{{.Name}}">
+            </a>
+            <a class="name" href="/artist?id={{.ID}}">{{.Name}}</a>
+
+            <!-- Iterate over each member and display in hidden <p> elements -->
+            {{range .Members}}
+            <p class="member" style="display:none;">{{.}}</p>
+            {{end}}
+            <p class="firstAlbum" style="display:none;">{{.FirstAlbum}}</p>
+            <p class="creationDate" style="display:none;">{{.CreationDate}}</p>
+            {{range .LOCATIONS}}
+            <p class="location" style="display:none;">{{.}}</p>
+            {{end}}
+        </li>
+        {{end}}
+    </ul>
+
+    <footer class="footer">
+        <a href="https://github.com/kinoz01" target="_blank" class="footer-link">
+            <img src="https://i.postimg.cc/wxsg8CN0/github-icon-2.png" alt="GitHub Logo" class="github-logo">
+            kinoz01
+        </a>
+    </footer>
+
+    <!-- Include external JavaScript files -->
+    <script src="../js/search.js"></script>
+    <script src="../js/filter.js"></script>
+</body>
+</html>
