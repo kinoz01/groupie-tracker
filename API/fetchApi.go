@@ -24,13 +24,20 @@ type SearchResults struct {
 // Cache structure to store query and image URL pairs
 type Cache map[string]string
 
+var (
+	serpAPIKey = os.Getenv("SERPAPI_KEY")
+)
+
 const (
-	apiKey    = "00f93dbcc368abe0041df6b8f4ff6b90ab59665e2f5867cf6ff0ee74f9e15db9" // serpapi key
 	cacheFile = "./API/locations.json" // json file name
 )
 
 func GetApiImage(query string) string {
-	
+	if serpAPIKey == "" {
+		log.Println("SERPAPI_KEY is not set; skipping SerpAPI lookup.")
+		return ""
+	}
+
 	query = FormatQuery(query)
 
 	// Load cache from file or initialize a new one
@@ -44,7 +51,7 @@ func GetApiImage(query string) string {
 		return url
 	}
 
-	apiUrl := fmt.Sprintf(server.APILinks.SerpApi, query, apiKey)
+	apiUrl := fmt.Sprintf(server.APILinks.SerpApi, query, serpAPIKey)
 
 	// Send HTTP GET request
 	resp, err := http.Get(apiUrl)

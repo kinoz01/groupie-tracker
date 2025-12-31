@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{.Artist.Name}} Groupie Tracker</title>
     <link rel="stylesheet" href="../css/artist.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Home icon -->
     <link rel="icon" href="{{.MyAPI.Image}}" type="image/x-icon">
 </head>
@@ -177,18 +178,15 @@
 
 <!-- Inline Script to Pass Locations Array -->
 <script>
-    locations = [];
+    window.locations = [];
     {{range .Locations.Locations}}
-    locations.push("{{.}}");
+    window.locations.push("{{.}}");
     {{end}}
 </script>
-
-<!-- Google Maps API -->
-<script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQGCy1iSgnMkZpSBC1PJMj_ZdqJ-PpzDo&callback=initMap">
+<script>
+    window.MAPBOX_ACCESS_TOKEN = "{{.MapboxToken}}";
 </script>
-
-<!-- Map JavaScript File -->
-<script src="../js/mapScript.js"></script>
+<script defer src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+<script defer src="../js/mapScript.js"></script>
 </body>
 </html>

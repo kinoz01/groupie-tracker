@@ -37,6 +37,7 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	if quit := FetchSyncData(w, id, &artistDetails); quit {
 		return
 	}
+	artistDetails.MapboxToken = os.Getenv("MAPBOX_ACCESS_TOKEN")
 	ParseAndExecute(w, artistDetails, "frontend/templates/artist.html")
 }
 

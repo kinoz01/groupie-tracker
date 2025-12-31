@@ -1,0 +1,5 @@
+# Ignore local environment files and caches
+.env**
+.gocache/
+.gomodcache/
+bin/

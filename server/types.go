@@ -41,11 +41,12 @@ type MyAPI struct {
 }
 
 type ArtistDetails struct {
-	Artist    Artist
-	Locations Locations
-	Dates     Dates
-	Relations Relations
-	MyAPI     MyAPI
+	Artist      Artist
+	Locations   Locations
+	Dates       Dates
+	Relations   Relations
+	MyAPI       MyAPI
+	MapboxToken string `json:"-"`
 }
 
 // ApiLinks represents the JSON links structure

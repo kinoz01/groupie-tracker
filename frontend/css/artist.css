@@ -436,6 +436,16 @@ body, html {
     scroll-snap-align: center;
 }
 
+.mapbox-token-missing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 1rem;
+    text-align: center;
+}
+
 
 
 /*****************************************************************************************************/
